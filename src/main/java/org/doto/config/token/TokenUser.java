@@ -8,11 +8,11 @@ import java.util.Collection;
 
 public class TokenUser implements UserDetails {
 
-    private String username;
+    private final String username;
 
-    private String password;
+    private final String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
 
     public TokenUser(User user, Collection<? extends GrantedAuthority> authorities) {

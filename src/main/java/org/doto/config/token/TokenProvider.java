@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.doto.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +46,7 @@ public class TokenProvider {
     }
 
     public String getUsername(String token) {
-        return String.valueOf(Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().get("username"));
+        return String.valueOf(Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().get("email"));
     }
 
     public boolean validateToken(String token) {

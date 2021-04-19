@@ -29,4 +29,8 @@ public class Task {
     private Timestamp deadline;
     @Column(name = "status")
     private TaskStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 }

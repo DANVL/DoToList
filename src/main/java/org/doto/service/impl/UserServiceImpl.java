@@ -49,8 +49,10 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-//    @Override
-//    public void updateRoleById(Integer id, Role role) {
-//        userRepository.updateRole(id,role);
-//    }
+    @Override
+    public void updateRoleById(Integer id, Role role) {
+        User user = findById(id);
+        user.setRole(role);
+        userRepository.save(user);
+    }
 }

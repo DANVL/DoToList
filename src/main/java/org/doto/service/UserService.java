@@ -18,5 +18,5 @@ public interface UserService {
 
     void deleteById(Integer id);
 
-//    void updateRoleById(Integer id, Role role);
+    void updateRoleById(Integer id, Role role);
 }
