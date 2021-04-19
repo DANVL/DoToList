@@ -49,7 +49,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         webSecurity
                 .ignoring()
                 .antMatchers("/api/login")
-                .antMatchers("/api/register");
+                .antMatchers("/api/register")
+                .antMatchers("/v3/**")
+                .antMatchers("/swagger-ui.html")
+                .antMatchers("/swagger-ui/**");
     }
 
     @Override
