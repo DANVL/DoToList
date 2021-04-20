@@ -1,7 +1,9 @@
 package org.doto.service.impl;
 
 import org.doto.entity.Task;
+import org.doto.entity.User;
 import org.doto.repository.TaskRepository;
+import org.doto.repository.UserRepository;
 import org.doto.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +15,24 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
+    }
+
+    @Override
+    public List<Task> findByUserId(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+
+        return user.map(taskRepository::findByUser).orElse(null);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.doto.service;
 
 import org.doto.entity.Role;
+import org.doto.entity.Task;
 import org.doto.entity.User;
 
 import java.util.List;
