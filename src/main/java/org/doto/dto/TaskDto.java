@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 public class TaskDto {
-    private Integer id;
     private String title;
     private String description;
     private Timestamp creationDate;

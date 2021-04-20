@@ -42,28 +42,34 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> saveTask(@RequestBody TaskDto taskDto){
+    public ResponseEntity<Task> saveTask(@RequestBody TaskDto taskDto) {
 
-        if(taskDto.getId() != null){
-            Task task = taskService.findById(taskDto.getId());
-            if(task != null){
-                User user = userService.findById(taskDto.getUserId());
-                if(user != null){
-                    return getTaskResponseEntity(taskDto, task, user);
-                }else{
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                }
-            }else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }else{
-            User user = userService.findById(taskDto.getUserId());
-            if(user != null){
-                return getTaskResponseEntity(taskDto, new Task(), user);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        User user = userService.findById(taskDto.getUserId());
+        if (user != null) {
+            return getTaskResponseEntity(taskDto, new Task(), user);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody TaskDto taskDto) {
+
+        Task task = taskService.findById(id);
+        if (task != null) {
+
+            User user = userService.findById(taskDto.getUserId());
+            if (user != null) {
+                return getTaskResponseEntity(taskDto, task, user);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     private ResponseEntity<Task> getTaskResponseEntity(TaskDto taskDto, Task task, User user) {
