@@ -35,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest){
+    public ResponseEntity<User> register(@Valid @RequestBody RegisterRequest registerRequest){
         User newUser = User.builder()
                 .email(registerRequest.getEmail())
                 .password(registerRequest.getPassword())
