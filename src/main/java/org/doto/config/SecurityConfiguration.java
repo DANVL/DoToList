@@ -1,5 +1,6 @@
 package org.doto.config;
 
+import org.apache.catalina.filters.CorsFilter;
 import org.doto.config.token.TokenAuthenticationEntryPoint;
 import org.doto.config.token.TokenConfigurer;
 import org.doto.config.token.TokenProvider;
@@ -18,6 +19,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -77,6 +83,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .anonymous()
+                .and()
+                .cors()
                 .and()
                 .apply(new TokenConfigurer(tokenProvider));
     }
