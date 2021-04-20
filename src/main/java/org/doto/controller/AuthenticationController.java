@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
@@ -26,7 +28,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest loginRequest) {
         User loggedUser = userService.findByEmailAndPassword(loginRequest.getEmail(),loginRequest.getPassword());
 
         return new ResponseEntity<>(tokenService.tokenProvider(loggedUser), HttpStatus.OK);

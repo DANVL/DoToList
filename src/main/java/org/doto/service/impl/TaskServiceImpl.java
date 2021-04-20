@@ -1,6 +1,7 @@
 package org.doto.service.impl;
 
 import org.doto.entity.Task;
+import org.doto.entity.TaskStatus;
 import org.doto.entity.User;
 import org.doto.repository.TaskRepository;
 import org.doto.repository.UserRepository;
@@ -50,5 +51,15 @@ public class TaskServiceImpl implements TaskService {
     public void delete(Integer id) {
 
         taskRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateStatus(Integer id, TaskStatus taskStatus) {
+        Optional<Task> task = taskRepository.findById(id);
+        if(task.isPresent()){
+            Task updated = task.get();
+            updated.setStatus(taskStatus);
+            taskRepository.save(updated);
+        }
     }
 }

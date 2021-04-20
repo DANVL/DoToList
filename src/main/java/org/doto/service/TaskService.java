@@ -1,6 +1,7 @@
 package org.doto.service;
 
 import org.doto.entity.Task;
+import org.doto.entity.TaskStatus;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface TaskService {
     Task save(Task task);
 
     void delete(Integer id);
+
+    void updateStatus(Integer id, TaskStatus taskStatus);
 }

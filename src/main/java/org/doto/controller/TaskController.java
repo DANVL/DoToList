@@ -1,5 +1,6 @@
 package org.doto.controller;
 
+import org.doto.dto.StatusDto;
 import org.doto.dto.TaskDto;
 import org.doto.entity.Task;
 import org.doto.entity.User;
@@ -74,6 +75,12 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Task> setStatus(@PathVariable Integer id, @RequestBody StatusDto statusDto){
+        taskService.updateStatus(id, statusDto.getTaskStatus());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private ResponseEntity<Task> getTaskResponseEntity(TaskDto taskDto, Task task, User user) {
