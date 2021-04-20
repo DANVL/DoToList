@@ -27,7 +27,7 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getTasks(@RequestParam Integer userId) {
+    public ResponseEntity<List<Task>> getTasks(@RequestParam(required = false) Integer userId) {
         if(userId != null){
             return new ResponseEntity<>(taskService.findByUserId(userId), HttpStatus.OK);
         }
